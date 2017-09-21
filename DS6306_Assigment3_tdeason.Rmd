@@ -1,0 +1,177 @@
+--
+title: "Doing Data Science - Assignment2 "
+author: "Travis Deason"
+date: "Sept, 14th 2017"
+output:  html_document
+---
+
+# Live session unit 02 assignment
+
+Calculation Questions (using R) - Use R to calculate the following:
+NOTE: Submit a word file with the R codes in text format and its screenshot that shows the result.
+
+```{r, echo=TRUE, message=FALSE}
+rm( list = ls()); cat("\014")  # Clear environment
+```
+
+***
+#### Question 1. (30%) swirl R Programming; Take a screenshot that shows the last code result or completion message.
+
+
+![Swirl Section 14](../images/6306_3_1.png)
+
+***
+#### Question 2 -	1.	(35%) Using the Rolling Data Sales website, download and examine housing sales data set of Brooklyn - which is named and downloadable here - “[XLS] Brooklyn” - at the web site - Rolling Housing Sales for NYC. You could download “” from box.com as well if you have a technical difficulty but I recommend you to download it from the web site. I need a screenshot of the project.
+
+**a**\.	a.	Goal: Create an RStudio project for the analysis of this data set. Your file structure within the project should include the following:
+
+*	A README file in the project root directory that includes an explanation of the purpose of the project and the other files
+* A source directory containing R_rollingsales_brooklyn.R that you have to complete; There are 4 TODO comments that you have to look at and complete. Your code R_rollingsales_brooklyn.R clean up the input csv data. The clean up includes finding out where there are outliers or missing values, deciding how you will treat them, making sure values you think are numerical are being treated as such (correct R class), etc.
+* A data directory containing input csv file to load in. 
+* A paper directory containing a file (plain text or Markdown) that explains any meaningful patterns in this dataset. You can present at most 2 paragraphs. 
+
+[Brooklyn Housing Project](https://github.com/tdeason416/6306_brooklyn)
+
+
+```{r, echo=TRUE, message=FALSE}
+log(10)
+```
+
+
+**b**\.	What is the default base for the log function? Calculate the log of your previous number with a different base.
+
+The Default Base for a log function in R is the natural log (2.71)
+this can be changed to the common log as shown below...
+
+```{r, echo=TRUE, message=FALSE}
+log(100, 10)
+```
+
+
+**c**\.	The log of a negative number. (explain the  answer)
+
+```{r, echo=TRUE, message=FALSE}
+log(-5)
+```
+The log of a negative number is undefined, this is because the domain of the log function is only positive.  R gives us NaN for not a number.
+
+
+**d**\.	The square-root of a positive number.
+
+```{r, echo=TRUE, message=FALSE}
+sqrt(169)
+```
+
+***
+#### 3.	(10%) Random number generation.
+**a**\.	Create a vector of 15 standard normal random variables. Calculate its mean and SD.
+
+```{r, echo=TRUE, message=FALSE}
+nums = rnorm(15)
+sd(nums)
+mean(nums)
+```
+
+The standard deviation of the value is .86, and the mean is -.55.  As our sample grows, or we average the value of more samples, these values will converge to 1 and 0 for the standard deviation and mean respectivly 
+
+**b**\.	Change the mean to 10 and the SD to 2 and recalculate the vector of 15 random normal variables.  Calculate its mean and SD.
+
+```{r, echo=TRUE, message=FALSE}
+nums = rnorm(15, 10, 2)
+sd(nums)
+mean(nums)
+```
+
+The mean is now at 10.1, and the standard deviation is at 1.58.  The mean is now closer to the population mean, while the standard devion is slightly further away then it was in our previous example.
+
+
+**c**\. Using the following sequence, create a plot of the normal distribution with a mean = 0 and standard deviation = 1.
+
+x <- seq(-5,3, 0.06)
+
+````{r echo=TRUE}
+x <- seq(-5,7, 0.01)
+
+# Sample Code
+hx <- dnorm(x, mean=0, sd=1)
+plot(x, hx, type="l", lty=2, xlab="x value", ylab="Density", main="Plot of Normal Distribution")
+
+````
+
+***
+#### 4.	(35%) Vector Operations
+
+**a**\.	The weights of 6 individuals in kg are 60, 72, 57, 90, 95,  72.
+
+```{r, echo=TRUE, message=FALSE}
+weights = c(60, 72, 57, 90, 95,  72)
+```
+
+**b**\.  Their heights (in m) are 1.80, 1.85, 1.72, 1.90, 1.74,  1.91.
+
+```{r, echo=TRUE, message=FALSE}
+heights = c(1.80, 1.85, 1.72, 1.90, 1.74,  1.91)
+```
+
+**c**\.	Enter these vectors into R.
+
+```{r, echo=TRUE, message=FALSE}
+print(weights)
+print(heights)
+```
+
+**d**\.	Create a scatterplot of weight vs.  height.  Interpret the  scatterplot.
+
+```{r, echo=TRUE, message=FALSE}
+plot(weights, heights, main= "Heights Verses Weights", 
+     xlab='Weight', ylab='height', pch=19)
+```
+
+**e**\.	Calculate the BMI for each individual. (BMI = weight in kg divided by the square of the height in m)
+
+```{r, echo=TRUE, message=FALSE}
+BMI = weights / heights
+print(BMI)
+```
+
+**f**\.	Calculate the mean for weight.
+
+```{r, echo=TRUE, message=FALSE}
+print(mean(weights))
+print(mean(weights) * (1000/450))
+```
+
+The mean weight of the sample is 74.33KG (equivilant to 165 lbs)
+
+**g**\.	Sum the result. Now you know why we square the deviations from the mean to calculate  a  standard deviation!
+
+```{r, echo=TRUE, message=FALSE}
+weights - mean(weights)
+(weights - mean(weights))**2
+sum((weights - mean(weights))**2)
+sqrt(sum((weights - mean(weights))**2))
+```
+
+***
+#### 5.	(25%) Your data science profile. 
+Enter your data science profile into R as a data frame with two columns. Call it by your first name. The categories are 
+  - computer programming, 
+  - math, 
+  - statistics, 
+  - machine learning, 
+  - domain expertise,
+  - communication presentation skills, 
+  - data visualization.
+
+Your ranking for each category 1  5, with 5 as best. Create   a bar graph of your data science profile. When you submit your work, please submit your code, including the data entry piece.
+
+```{r, echo=TRUE, message=FALSE}
+scores = c(4, 3, 2, 4, 4, 3, 3)
+catagories = c('computer programming', 'math', 'statistics', 'machine learning', 'domain expertise', 'communication and presentation skills', 'data visualization')
+Travis = data.frame(catagories, scores)
+print(Travis)
+hist(Travis$scores)
+```
+
+
+
